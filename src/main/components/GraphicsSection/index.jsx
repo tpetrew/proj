@@ -8,7 +8,7 @@ const GraphicsSection = () => {
         <div className="main-panel__graphics-box">
             <div className="main-panel__graphics-box__wrapper">
                 <div className="main-panel__invoices-wrapper__header">
-                    <h4>Analytic Reports</h4>
+                    {/* <h4>Analytic Reports</h4> */}
                     <ChangeDate />
                 </div>
                 <div className="graphic-wrapper">
