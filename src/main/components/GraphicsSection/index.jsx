@@ -1,7 +1,6 @@
 import React from 'react';
 import ChangeDate from '../ChangeDate';
 import { Stage, Layer, Line } from 'react-konva';
-import Konva from 'konva';
 
 
 const GraphicsSection = () => {
