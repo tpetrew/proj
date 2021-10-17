@@ -1,8 +1,9 @@
 # Finance Dash
 ## Service for controlling finances
 
-
-<img src="http://pzmskh47.beget.tech/imagesProj/screenshoot2" width="1000"/>
+<img src="http://pzmskh47.beget.tech/imagesProj/screenshoot1" style="float: left, margin-right: 10" width="300"/>
+<img src="http://pzmskh47.beget.tech/imagesProj/screenshoot2" style="float: left, margin-right: 10" width="300"/>
+<img src="http://pzmskh47.beget.tech/imagesProj/screenshoot3" style="float: left" width="300"/>
 
 ## Tech
 
@@ -19,6 +20,9 @@ Install the dependencies and devDependencies and start the server.
 
 ```sh
 npm install
+```
 
+```sh
 npm start
 ```
+
