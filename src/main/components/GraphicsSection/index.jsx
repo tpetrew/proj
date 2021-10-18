@@ -1,16 +1,23 @@
 import React from 'react';
 import ChangeDate from '../ChangeDate';
-import { useDispatch } from 'react-redux';
 import { Stage, Layer, Line } from 'react-konva';
-
+import { useSelector, useDispatch } from 'react-redux';
+import { getGraphicData } from '../../../reducers/graphicReducer';
 
 const GraphicsSection = () => {
+
+    const ORANGE_COLOR = '#FE6D58';
+    const GREEN_COLOR = '#05D376';
+    const BLUE_COLOR = '#346AEC';
+    const SECONDARY_COLOR = '#FAFAFA';
+
+    const graphicType = useSelector(state => state.graphic.type)
 
     return (
         <div className="main-panel__graphics-box">
             <div className="main-panel__graphics-box__wrapper">
                 <div className="main-panel__invoices-wrapper__header">
-                    {/* <h4>Analytic Reports</h4> */}
+                    <h4>Analytic Reports</h4>
                     <ChangeDate />
                 </div>
                 <div className="graphic-wrapper">
@@ -23,6 +30,8 @@ const GraphicsSection = () => {
                         <div className="value">$0k</div>
                     </div>        
                     <div className="main-panel__graphics-box__wrapper__graphic">
+
+                        {/* 1 */}
                         <div className="main-panel__graphics-box__wrapper__graphic__canvas">
                             <Stage width={1000} height={500}>
                                 <Layer>
@@ -34,17 +43,17 @@ const GraphicsSection = () => {
                                         lineJoin={"round"}
                                         tension={0.4}
                                         // bezier={true}
-                                        stroke={"#fafafa"}
+                                        stroke={graphicType === 2 ? BLUE_COLOR : SECONDARY_COLOR}
                                         lineCap={"round"}
-                                        shadowColor={"#fafafa"}
+                                        shadowColor={graphicType === 2 ? BLUE_COLOR : SECONDARY_COLOR}
                                         shadowBlur={20}
                                         shadowOpacity={0.6}
                                         shadowOffsetY={20}
-                                        fill={"#FE6D58"}
                                     />
                                 </Layer>
                             </Stage>
                         </div>
+                        {/* 2 */}
                         <div className="main-panel__graphics-box__wrapper__graphic__canvas">
                             <Stage width={1000} height={500}>
                                 <Layer>
@@ -56,17 +65,17 @@ const GraphicsSection = () => {
                                         lineJoin={"round"}
                                         tension={0.4}
                                         // bezier={true}
-                                        stroke={"#fafafa"}
+                                        stroke={graphicType === 1 ? ORANGE_COLOR : SECONDARY_COLOR}
                                         lineCap={"round"}
-                                        shadowColor={"#fafafa"}
+                                        shadowColor={graphicType === 1 ? ORANGE_COLOR : SECONDARY_COLOR}
                                         shadowBlur={20}
                                         shadowOpacity={0.6}
                                         shadowOffsetY={20}
-                                        fill={"#FE6D58"}
                                     />
                                 </Layer>
                             </Stage>
                         </div>
+                        {/* 3 */}
                         <div className="main-panel__graphics-box__wrapper__graphic__canvas">
                             <Stage width={1000} height={500}>
                                 <Layer>
@@ -78,9 +87,9 @@ const GraphicsSection = () => {
                                         lineJoin={"round"}
                                         tension={0.4}
                                         // bezier={true}
-                                        stroke={"#05D376"}
+                                        stroke={graphicType === 0 ? GREEN_COLOR : SECONDARY_COLOR}
                                         lineCap={"round"}
-                                        shadowColor={"#05D376"}
+                                        shadowColor={graphicType === 0 ? GREEN_COLOR : SECONDARY_COLOR}
                                         shadowBlur={20}
                                         shadowOpacity={0.6}
                                         shadowOffsetY={20}
@@ -89,6 +98,7 @@ const GraphicsSection = () => {
                                 </Layer>
                             </Stage>
                         </div>
+                        {/* sections mini */}
                         <div className="main-panel__graphics-box__wrapper__graphic__sections-horizontal">
                             <div className="section">
                                 <div className="section__vertical-line"></div>
