@@ -47,6 +47,7 @@ $lightOrange: #FFF4F3
 $secondText: #96A1B4
 $lightGray: #e3e4e6
 $lighterGray: #f0f0f0
+$gray: #272E48
 
 .text-green
   color: #05D376
@@ -831,29 +832,42 @@ $lighterGray: #f0f0f0
   display: none
 
 .cards-panel__header__change-card-button__modal
+  overflow: hidden
   position: absolute
   display: flex
   flex-direction: column
   justify-content: space-between
   width: 130px
-  height: 200px
+  height: 240px
   background-color: #fff
   z-index: 99999
   right: 30px
   top: 80px
   box-sizing: border-box
-  padding: 25px 15px 25px 15px
+  // padding: 25px 15px 25px 15px
   border-radius: 10px
   box-shadow: 0px 20px 69px -20px #4e4e4e
 
 .change-card-style__color
+  padding: 0 15px 
+  height: 40px
   transition: .2s
   cursor: pointer
-  font-size: 0.8em
+  color: $gray
+  font-size: 0.7em
   font-weight: 500
+  display: flex
+  align-items: center
+  border-bottom: 1px solid $lighterGray
 
   &:hover
     color: #777
+
+.change-card-style__color__circle 
+  width: 10px
+  height: 10px
+  border-radius: 10px
+  margin-right: 5px
 /*RECENT ACTIVITY
 
 .recent-activity-wrapper__column

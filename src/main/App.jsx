@@ -14,7 +14,7 @@ const App = () => {
     const [contentLoaded, setContentLoaded] = useState(false)
 
     useEffect(() => {
-        setTimeout(() => setContentLoaded(true), 2000)
+        setTimeout(() => setContentLoaded(true), 3000)
     }, [])
 
     if (!contentLoaded) {

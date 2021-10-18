@@ -256,12 +256,12 @@ const MainScreen = () => {
                         <img src={MoreButton} />
                     </div>
                     <div className={isSetStyleModalVisible ? "cards-panel__header__change-card-button__modal" : "cards-panel__header__change-card-button__modal__not-visible"}>
-                            <div onClick={() => changeBankCardStyle("orange")} className="change-card-style__color">Orange</div>
-                            <div onClick={() => changeBankCardStyle("black")} className="change-card-style__color">Black</div>
-                            <div onClick={() => changeBankCardStyle("green")} className="change-card-style__color">Green</div>
-                            <div onClick={() => changeBankCardStyle("blue-green")} className="change-card-style__color">Blue-Green</div>
-                            <div onClick={() => changeBankCardStyle("gray")} className="change-card-style__color">Gray</div>
-                            <div onClick={() => changeBankCardStyle("blue")} className="change-card-style__color">Blue</div>
+                            <div onClick={() => changeBankCardStyle("orange")} className="change-card-style__color"><div className="change-card-style__color__circle" style={{backgroundColor: "#FF998F"}}/>Orange</div>
+                            <div onClick={() => changeBankCardStyle("black")} className="change-card-style__color"><div className="change-card-style__color__circle" style={{backgroundColor: "#212121"}}/>Black</div>
+                            <div onClick={() => changeBankCardStyle("green")} className="change-card-style__color"><div className="change-card-style__color__circle" style={{backgroundColor: "#0F5959"}}/>Green</div>
+                            <div onClick={() => changeBankCardStyle("blue-green")} className="change-card-style__color"><div className="change-card-style__color__circle" style={{backgroundColor: "#6594DB"}}/>Blue-Green</div>
+                            <div onClick={() => changeBankCardStyle("gray")} className="change-card-style__color"><div className="change-card-style__color__circle" style={{backgroundColor: "#5B628B"}}/>Gray</div>
+                            <div onClick={() => changeBankCardStyle("blue")} className="change-card-style__color"><div className="change-card-style__color__circle" style={{backgroundColor: "#100DA7"}}/>Blue</div>
                     </div>
                 </div>
 
