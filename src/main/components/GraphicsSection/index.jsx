@@ -1,8 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 import ChangeDate from '../ChangeDate';
 import { Stage, Layer, Line } from 'react-konva';
-import { useSelector, useDispatch } from 'react-redux';
-import { getGraphicData } from '../../../reducers/graphicReducer';
+import { useSelector } from 'react-redux';
 
 const GraphicsSection = () => {
 
@@ -12,6 +11,8 @@ const GraphicsSection = () => {
     const SECONDARY_COLOR = '#FAFAFA';
 
     const graphicType = useSelector(state => state.graphic.type)
+    const graphicPoints = useSelector(state => state.graphic.data[graphicType].points)
+    const graphicName = useSelector(state => state.graphic.data[graphicType].name)
 
     return (
         <div className="main-panel__graphics-box">
@@ -28,24 +29,22 @@ const GraphicsSection = () => {
                         <div className="value">$2k</div>
                         <div className="value">$1k</div>
                         <div className="value">$0k</div>
-                    </div>        
+                    </div>
                     <div className="main-panel__graphics-box__wrapper__graphic">
-
                         {/* 1 */}
                         <div className="main-panel__graphics-box__wrapper__graphic__canvas">
                             <Stage width={1000} height={500}>
                                 <Layer>
                                     <Line
-                                        points={[0, 500, 50, 400, 100, 420, 150, 100, 200, 390, 250, 400, 300, 200, 350, 250, 400, 190, 450, 300, 500, 400, 550, 400, 600, 420, 650, 100, 700, 390, 750, 400, 800, 200, 850, 250, 900, 190, 950, 300, 1000, 350]}
+                                        points={graphicPoints}
                                         x={0}
                                         y={0}
                                         strokeWidth={4}
                                         lineJoin={"round"}
                                         tension={0.4}
-                                        // bezier={true}
-                                        stroke={graphicType === 2 ? BLUE_COLOR : SECONDARY_COLOR}
+                                        stroke={graphicType === 2 ? BLUE_COLOR : graphicType === 1 ? ORANGE_COLOR : GREEN_COLOR}
                                         lineCap={"round"}
-                                        shadowColor={graphicType === 2 ? BLUE_COLOR : SECONDARY_COLOR}
+                                        shadowColor={graphicType === 2 ? BLUE_COLOR : graphicType === 1 ? ORANGE_COLOR : GREEN_COLOR}
                                         shadowBlur={20}
                                         shadowOpacity={0.6}
                                         shadowOffsetY={20}
@@ -53,204 +52,48 @@ const GraphicsSection = () => {
                                 </Layer>
                             </Stage>
                         </div>
-                        {/* 2 */}
-                        <div className="main-panel__graphics-box__wrapper__graphic__canvas">
-                            <Stage width={1000} height={500}>
-                                <Layer>
-                                    <Line
-                                        points={[0, 300, 50, 200, 100, 220, 150, 300, 200, 290, 250, 200, 300, 100, 350, 450, 400, 190, 450, 100, 500, 400, 550, 300, 600, 200, 650, 220, 700, 300, 750, 290, 800, 200, 850, 100, 900, 450, 950, 190, 1000, 100]}
-                                        x={0}
-                                        y={0}
-                                        strokeWidth={4}
-                                        lineJoin={"round"}
-                                        tension={0.4}
-                                        // bezier={true}
-                                        stroke={graphicType === 1 ? ORANGE_COLOR : SECONDARY_COLOR}
-                                        lineCap={"round"}
-                                        shadowColor={graphicType === 1 ? ORANGE_COLOR : SECONDARY_COLOR}
-                                        shadowBlur={20}
-                                        shadowOpacity={0.6}
-                                        shadowOffsetY={20}
-                                    />
-                                </Layer>
-                            </Stage>
-                        </div>
-                        {/* 3 */}
-                        <div className="main-panel__graphics-box__wrapper__graphic__canvas">
-                            <Stage width={1000} height={500}>
-                                <Layer>
-                                    <Line
-                                        points={[0, 200, 50, 300, 100, 320, 150, 400, 200, 490, 250, 200, 300, 400, 350, 450, 400, 290, 450, 100, 500, 300, 550, 350, 600, 250, 650, 190, 700, 390, 750, 190, 800, 230, 850, 180, 900, 310, 950, 360, 1000, 100]}
-                                        x={0}
-                                        y={0}
-                                        strokeWidth={4}
-                                        lineJoin={"round"}
-                                        tension={0.4}
-                                        // bezier={true}
-                                        stroke={graphicType === 0 ? GREEN_COLOR : SECONDARY_COLOR}
-                                        lineCap={"round"}
-                                        shadowColor={graphicType === 0 ? GREEN_COLOR : SECONDARY_COLOR}
-                                        shadowBlur={20}
-                                        shadowOpacity={0.6}
-                                        shadowOffsetY={20}
-                                        fill={"#FE6D58"}
-                                    />
-                                </Layer>
-                            </Stage>
-                        </div>
+
                         {/* sections mini */}
                         <div className="main-panel__graphics-box__wrapper__graphic__sections-horizontal">
                             <div className="section">
                                 <div className="section__vertical-line"></div>
                                 <div className="section__horizontal-line"></div>
-                                <div className="section__date">01 Jun</div>
+                                <div className="section__date">1 Jun</div>
                                 <div className="section__hover">
                                     <div className="section__hover__box">
                                         <div className="section__hover__box__blur"></div>
                                         <div className="section__hover__box__content">
-                                            <h4>Total income</h4>
-                                            <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end'}}><h3>$2.600</h3><p>-12%</p></div>
+                                            <h4>{graphicName}</h4>
+                                            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end' }}><h3>${(500 - graphicPoints[3]) * 10}</h3><p> </p></div>
                                         </div>
                                     </div>
-                                    <div className="section__hover__vertical-line" style={{height: 200}}></div>
+                                    <div className="section__hover__vertical-line" style={{ height: 500 - graphicPoints[3] }}></div>
                                 </div>
                             </div>
-                            <div className="section">
-                                <div className="section__vertical-line"></div>
-                                <div className="section__horizontal-line"></div>
-                                <div className="section__date">02 Jun</div>
-                                <div className="section__hover">
-                                    <div className="section__hover__box">
-                                        <div className="section__hover__box__blur"></div>
-                                        <div className="section__hover__box__content">
-                                            <h4>Total income</h4>
-                                            <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end'}}><h3>$2.600</h3><p>-12%</p></div>
-                                        </div>
-                                    </div>
-                                    <div className="section__hover__vertical-line" style={{height: 100}}></div>
-                                </div>
-                            </div>
-                            <div className="section">
-                                <div className="section__vertical-line"></div>
-                                <div className="section__horizontal-line"></div>
-                                <div className="section__date">03 Jun</div>
-                                <div className="section__hover">
-                                    <div className="section__hover__box">
-                                        <div className="section__hover__box__blur"></div>
-                                        <div className="section__hover__box__content">
-                                            <h4>Total income</h4>
-                                            <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end'}}><h3>$2.600</h3><p>-12%</p></div>
-                                        </div>
-                                    </div>
-                                    <div className="section__hover__vertical-line" style={{height: 300}}></div>
-                                </div>
-                            </div>
-                            <div className="section">
-                                <div className="section__vertical-line"></div>
-                                <div className="section__horizontal-line"></div>
-                                <div className="section__date">04 Jun</div>
-                                <div className="section__hover">
-                                    <div className="section__hover__box">
-                                        <div className="section__hover__box__blur"></div>
-                                        <div className="section__hover__box__content">
-                                            <h4>Total income</h4>
-                                            <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end'}}><h3>$2.600</h3><p>-12%</p></div>
-                                        </div>
-                                    </div>
-                                    <div className="section__hover__vertical-line" style={{height: 50}}></div>
-                                </div>
-                            </div>
-                            <div className="section">
-                                <div className="section__vertical-line"></div>
-                                <div className="section__horizontal-line"></div>
-                                <div className="section__date">05 Jun</div>
-                                <div className="section__hover">
-                                    <div className="section__hover__box">
-                                        <div className="section__hover__box__blur"></div>
-                                        <div className="section__hover__box__content">
-                                            <h4>Total income</h4>
-                                            <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end'}}><h3>$2.600</h3><p>-12%</p></div>
-                                        </div>
-                                    </div>
-                                    <div className="section__hover__vertical-line" style={{height: 400}}></div>
-                                </div>
-                            </div>
-                            <div className="section">
-                                <div className="section__vertical-line"></div>
-                                <div className="section__horizontal-line"></div>
-                                <div className="section__date">06 Jun</div>
-                                <div className="section__hover">
-                                    <div className="section__hover__box">
-                                        <div className="section__hover__box__blur"></div>
-                                        <div className="section__hover__box__content">
-                                            <h4>Total income</h4>
-                                            <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end'}}><h3>$2.600</h3><p>-12%</p></div>
-                                        </div>
-                                    </div>
-                                    <div className="section__hover__vertical-line" style={{height: 200}}></div>
-                                </div>
-                            </div>
-                            <div className="section">
-                                <div className="section__vertical-line"></div>
-                                <div className="section__horizontal-line"></div>
-                                <div className="section__date">07 Jun</div>
-                                <div className="section__hover">
-                                    <div className="section__hover__box">
-                                        <div className="section__hover__box__blur"></div>
-                                        <div className="section__hover__box__content">
-                                            <h4>Total income</h4>
-                                            <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end'}}><h3>$2.600</h3><p>-12%</p></div>
-                                        </div>
-                                    </div>
-                                    <div className="section__hover__vertical-line" style={{height: 200}}></div>
-                                </div>
-                            </div>
-                            <div className="section">
-                                <div className="section__vertical-line"></div>
-                                <div className="section__horizontal-line"></div>
-                                <div className="section__date">08 Jun</div>
-                                <div className="section__hover">
-                                    <div className="section__hover__box">
-                                        <div className="section__hover__box__blur"></div>
-                                        <div className="section__hover__box__content">
-                                            <h4>Total income</h4>
-                                            <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end'}}><h3>$2.600</h3><p>-12%</p></div>
-                                        </div>
-                                    </div>
-                                    <div className="section__hover__vertical-line" style={{height: 200}}></div>
-                                </div>
-                            </div>
-                            <div className="section">
-                                <div className="section__vertical-line"></div>
-                                <div className="section__horizontal-line"></div>
-                                <div className="section__date">09 Jun</div>
-                                <div className="section__hover">
-                                    <div className="section__hover__box">
-                                        <div className="section__hover__box__blur"></div>
-                                        <div className="section__hover__box__content">
-                                            <h4>Total income</h4>
-                                            <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end'}}><h3>$2.600</h3><p>-12%</p></div>
-                                        </div>
-                                    </div>
-                                    <div className="section__hover__vertical-line" style={{height: 200}}></div>
-                                </div>
-                            </div>
-                            <div className="section">
-                                <div className="section__vertical-line"></div>
-                                <div className="section__horizontal-line"></div>
-                                <div className="section__date">10 June</div>
-                                <div className="section__hover">
-                                    <div className="section__hover__box">
-                                        <div className="section__hover__box__blur"></div>
-                                        <div className="section__hover__box__content">
-                                            <h4>Total income</h4>
-                                            <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end'}}><h3>$2.600</h3><p>-12%</p></div>
-                                        </div>
-                                    </div>
-                                    <div className="section__hover__vertical-line" style={{height: 200}}></div>
-                                </div>
-                            </div>
-                        </div>              
+                            {
+                                graphicPoints.map((point, key) => {
+                                    if (key > 2 && key % 4 === 3 && key < 38) {
+                                        return (
+                                            <div className="section">
+                                                <div className="section__vertical-line"></div>
+                                                <div className="section__horizontal-line"></div>
+                                                <div className="section__date">June</div>
+                                                <div className="section__hover">
+                                                    <div className="section__hover__box">
+                                                        <div className="section__hover__box__blur"></div>
+                                                        <div className="section__hover__box__content">
+                                                            <h4>{graphicName}</h4>
+                                                            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end' }}><h3>${(500 - graphicPoints[key + 4]) * 10}</h3><p>-12%</p></div>
+                                                        </div>
+                                                    </div>
+                                                    <div className="section__hover__vertical-line" style={{ height: 500 - graphicPoints[key + 4] }}></div>
+                                                </div>
+                                            </div>
+                                        )
+                                    }
+                                })
+                            }
+                        </div>
                     </div>
                 </div>
             </div>
