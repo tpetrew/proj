@@ -8,7 +8,8 @@ import InvoiceLinePreview from '../../components/InvoiceLinePreview';
 import TotalPreviewCard from '../../components/TotalPreviewCard';
 import MoreButton from '../../../24/basic/gray/more-vertical.svg';
 import GraphicsSection from '../../components/GraphicsSection';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { setBankCardStyleModalVisible, setBankCardStyle } from '../../../reducers/bankCardReducer'
 
 const data = {
     user: {
@@ -165,7 +166,15 @@ const data = {
 
 const MainScreen = () => {
 
+    const dispatch = useDispatch()
+
     const graphicType = useSelector(state => state.graphic.type)
+    const isSetStyleModalVisible = useSelector(state => state.bankCard.isSetStyleModalVisible)
+
+    const changeBankCardStyle = color => {
+        dispatch(setBankCardStyle(color))
+        dispatch(setBankCardStyleModalVisible())
+    }
 
     return (
         <div className="wrapper">
@@ -241,11 +250,18 @@ const MainScreen = () => {
 
             <div className="cards-panel">
                 {/* BANK CARD */}
-
                 <div className="cards-panel__header">
                     <h4>Active card</h4>
-                    <div className="cards-panel__header__change-card-button">
+                    <div onClick={() => dispatch(setBankCardStyleModalVisible())} className="cards-panel__header__change-card-button">
                         <img src={MoreButton} />
+                    </div>
+                    <div className={isSetStyleModalVisible ? "cards-panel__header__change-card-button__modal" : "cards-panel__header__change-card-button__modal__not-visible"}>
+                            <div onClick={() => changeBankCardStyle("orange")} className="change-card-style__color">Orange</div>
+                            <div onClick={() => changeBankCardStyle("black")} className="change-card-style__color">Black</div>
+                            <div onClick={() => changeBankCardStyle("green")} className="change-card-style__color">Green</div>
+                            <div onClick={() => changeBankCardStyle("blue-green")} className="change-card-style__color">Blue-Green</div>
+                            <div onClick={() => changeBankCardStyle("gray")} className="change-card-style__color">Gray</div>
+                            <div onClick={() => changeBankCardStyle("blue")} className="change-card-style__color">Blue</div>
                     </div>
                 </div>
 

@@ -3,11 +3,15 @@ import EMVChip from '../../../images/EMV Chip.svg';
 import ContactlessIndicator from '../../../images/Contactless Indicator.svg';
 import Visa from '../../../images/Visa.svg';
 import Logo from '../../../images/Logo.svg';
+import { useSelector } from 'react-redux';
 
 const BankCard = () => {
+
+    const bankCardStyle = useSelector(state => state.bankCard.style)
+
     return (
         <div className="bank-card-wrapper">
-            <div className="bank-card__front card-background-orange transition-3s">
+            <div className={`bank-card__front card-background-${bankCardStyle} transition-3s`}>
                 <div className="bank-card__front__logos-wrapper">
                     <img className="visa-logo" src={Visa} />
                     <img className="bank-logo" src={Logo} />
