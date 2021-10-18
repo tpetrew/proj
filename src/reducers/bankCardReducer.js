@@ -16,7 +16,6 @@ export const bankCardReducer = createSlice({
   }
 })
 
-// Action creators are generated for each case reducer function
 export const { setBankCardStyle, setBankCardStyleModalVisible } = bankCardReducer.actions
 
 export default bankCardReducer.reducer

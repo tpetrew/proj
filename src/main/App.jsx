@@ -13,6 +13,10 @@ const App = () => {
     return (
         <Router>
             <div className="wrapper">
+                <div className="hello-screen">
+                    <h1>Hello, Anton!</h1>
+                    <h3>Wait just for a minute, we are preparing your dash...</h3>
+                </div>
                 <VerticalMenu />
                 <Switch>
                     <Route exact path="/">
