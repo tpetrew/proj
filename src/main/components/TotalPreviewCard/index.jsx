@@ -2,10 +2,15 @@ import React from 'react';
 import TextAlignRight from '../../../24/basic/white/text-align-right.svg';
 import ArrowTopRight from '../../../24/basic/white/arrow-top-right.svg';
 import Folder from '../../../24/basic/white/folder.svg';
+import { setGraphicType, getGraphicData } from '../../../reducers/graphicReducer';
+import { useDispatch } from 'react-redux';
 
-const TotalPreviewCard = ({item}) => {
+const TotalPreviewCard = ({item, active, type}) => {
+
+    const dispatch = useDispatch()
+
     return (
-        <div className="main-panel__total-blocks__box">
+        <div onClick={() => dispatch(setGraphicType(type))} className={active ? "main-panel__total-blocks__box__active main-panel__total-blocks__box" : "main-panel__total-blocks__box"}>
             <div className="main-panel__total-blocks__box__first-line">
                 <span>{item.name}</span>
                 <div className={`main-panel__total-blocks__box__first-line__icon-wrapper ${item.color}`}>

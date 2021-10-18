@@ -1,7 +1,4 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
-import { useDispatch } from 'react-redux';
-import { setCount } from '../reducers/Reducer';
 import VerticalMenu from './components/VerticalMenu';
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import MainScreen from './screens/MainScreen';
@@ -12,12 +9,6 @@ import ElementsScreen from './screens/ElementsScreen'
 import SettingsScreen from './screens/SettingsScreen'
 
 const App = () => {
-    const dispatch = useDispatch()
-    const count = useSelector(state => state.repos.count)
-
-    function onCountClick() {
-        dispatch(setCount(5))
-    }
 
     return (
         <Router>

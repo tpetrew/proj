@@ -7,7 +7,7 @@ import Logo from '../../../images/Logo.svg';
 const BankCard = () => {
     return (
         <div className="bank-card-wrapper">
-            <div className="bank-card__front card-background-blue transition-3s">
+            <div className="bank-card__front card-background-orange transition-3s">
                 <div className="bank-card__front__logos-wrapper">
                     <img className="visa-logo" src={Visa} />
                     <img className="bank-logo" src={Logo} />

@@ -7,17 +7,16 @@ module.exports = {
     entry: ["@babel/polyfill", "./src/index.jsx"],
     output: {
         path: path.resolve(__dirname, "dist"),
-        filename: "[name].[hash].js"
+        filename: "[name].[hash].js",
+        publicPath: '/'
     },
     devServer: {
+        historyApiFallback: true,
         port: 3000
     },
     plugins: [
         new CleanWebpackPlugin(),
         new HTMLWebpackPlugin({ template: "./src/index.html" }),
-        // new webpack.DefinePlugin({
-        //     'process.env.WEBPACK_PUBLIC_PATH': JSON.stringify(process.env.WEBPACK_PUBLIC_PATH)
-        //   })
     ],
     resolve: {
         extensions: ['.js', '.jsx'],
@@ -27,20 +26,6 @@ module.exports = {
             {
                 test: /\.(css|sass)$/,
                 use: ["style-loader", "css-loader", "sass-loader"],
-                // use: [
-                //     {
-                //       loader: "style-loader"
-                //     },
-                //     {
-                //       loader: "css-loader"
-                //     },
-                //     {
-                //       loader: "resolve-url-loader"
-                //     },
-                //     {
-                //       loader: "sass-loader"
-                //     }
-                //   ]
             },
             {
                 test: /\.(jpg|png|svg|gif|jpeg)$/,

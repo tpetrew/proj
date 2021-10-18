@@ -8,6 +8,7 @@ import InvoiceLinePreview from '../../components/InvoiceLinePreview';
 import TotalPreviewCard from '../../components/TotalPreviewCard';
 import MoreButton from '../../../24/basic/gray/more-vertical.svg';
 import GraphicsSection from '../../components/GraphicsSection';
+import { useSelector } from 'react-redux';
 
 const data = {
     user: {
@@ -163,6 +164,9 @@ const data = {
 
 
 const MainScreen = () => {
+
+    const graphicType = useSelector(state => state.graphic.type)
+
     return (
         <div className="wrapper">
             <div className="main-panel">
@@ -185,11 +189,15 @@ const MainScreen = () => {
 
                     {/* TARGETS */}
                     {data.total.map((item, key) => {
+                        if (graphicType === key) {
+                            return (
+                                <TotalPreviewCard type={key} item={item} key={key} active={true} />
+                            )
+                        } else
                         return (
-                            <TotalPreviewCard key={key} item={item}/>
+                            <TotalPreviewCard type={key} item={item} key={key} active={false} />
                         )
                     })}
-
                 </div>
 
                 {/* TOTAL BLOCKS END */}
@@ -220,7 +228,7 @@ const MainScreen = () => {
                             </div>
                             {data.invoices.map((item, key) => {
                                 return (
-                                    <InvoiceLinePreview item={item} key={key}/>
+                                    <InvoiceLinePreview item={item} key={key} />
                                 )
                             })}
                         </div>
@@ -230,7 +238,7 @@ const MainScreen = () => {
                 {/* INVOICES END */}
 
             </div>
-            
+
             <div className="cards-panel">
                 {/* BANK CARD */}
 
@@ -240,7 +248,7 @@ const MainScreen = () => {
                         <img src={MoreButton} />
                     </div>
                 </div>
-                
+
                 <div className="cards-half-swipe-wrapper">
                     <BankCard />
                 </div>
@@ -259,7 +267,7 @@ const MainScreen = () => {
                     <div className="recent-activity-wrapper__column">
                         {data.activity.map((item, key) => {
                             return (
-                                <ActivityLinePreview key={key} item={item}/>
+                                <ActivityLinePreview key={key} item={item} />
                             )
                         })}
                     </div>
@@ -279,7 +287,7 @@ const MainScreen = () => {
                     <div className="send-money-wrapper__column">
                         {data.people.map((item, key) => {
                             return (
-                                <PersonLinePreview key={key} item={item}/>
+                                <PersonLinePreview key={key} item={item} />
                             )
                         })}
                     </div>

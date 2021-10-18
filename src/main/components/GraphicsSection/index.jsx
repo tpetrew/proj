@@ -1,9 +1,11 @@
 import React from 'react';
 import ChangeDate from '../ChangeDate';
+import { useDispatch } from 'react-redux';
 import { Stage, Layer, Line } from 'react-konva';
 
 
 const GraphicsSection = () => {
+
     return (
         <div className="main-panel__graphics-box">
             <div className="main-panel__graphics-box__wrapper">
