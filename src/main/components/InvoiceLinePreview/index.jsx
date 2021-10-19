@@ -1,6 +1,8 @@
 import React from 'react';
 import CheckMark from '../../../24/basic/white/check-mark.svg';
 import CloseIcon from '../../../24/basic/close.svg';
+import { setIsInvoiceModalOpen } from '../../../reducers/invoiceReducer';
+import { useDispatch } from 'react-redux';
 
 const payStatus = (status) => {
     if(status) {
@@ -26,8 +28,10 @@ const payStatus = (status) => {
 
 const InvoiceLinePreview = ({item}) => {
 
+    const dispatch = useDispatch()
+
     return (
-        <div className="main-panel__invoices-wrapper__grid main-element">
+        <div onClick={() => dispatch(setIsInvoiceModalOpen())} className="main-panel__invoices-wrapper__grid main-element">
             <div className="main-panel__invoices-wrapper__grid__element flex-2 item">
                 <div className="date">{item.date}</div>
             </div>

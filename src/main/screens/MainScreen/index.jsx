@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 import SearchBar from '../../components/SearchBar';
 import BankCard from '../../components/BankCard';
+import { Transition, animated, config } from 'react-spring'
 import ChangeDate from '../../components/ChangeDate';
 import PersonLinePreview from '../../components/PersonLinePreview';
 import ActivityLinePreview from '../../components/ActivityLinePreview';
@@ -9,7 +10,9 @@ import TotalPreviewCard from '../../components/TotalPreviewCard';
 import MoreButton from '../../../24/basic/gray/more-vertical.svg';
 import GraphicsSection from '../../components/GraphicsSection';
 import { useSelector, useDispatch } from 'react-redux';
-import { setBankCardStyleModalVisible, setBankCardStyle } from '../../../reducers/bankCardReducer'
+import { setIsInvoiceModalOpen } from '../../../reducers/invoiceReducer';
+import { setBankCardStyleModalVisible, setBankCardStyle } from '../../../reducers/bankCardReducer';
+import InvoiceWindow from '../../components/InvoiceWindow';
 
 const data = {
     user: {
@@ -163,13 +166,13 @@ const data = {
     ]
 }
 
-
 const MainScreen = () => {
 
     const dispatch = useDispatch()
 
     const graphicType = useSelector(state => state.graphic.type)
     const isSetStyleModalVisible = useSelector(state => state.bankCard.isSetStyleModalVisible)
+    const isInvoiceModalOpen = useSelector(state => state.invoices.isInvoiceModalOpen)
 
     const changeBankCardStyle = color => {
         dispatch(setBankCardStyle(color))
@@ -178,6 +181,7 @@ const MainScreen = () => {
 
     return (
         <div className="wrapper">
+
             <div className="main-panel">
 
                 {/* MAIN HEADER */}
@@ -203,9 +207,9 @@ const MainScreen = () => {
                                 <TotalPreviewCard type={key} item={item} key={key} active={true} />
                             )
                         } else
-                        return (
-                            <TotalPreviewCard type={key} item={item} key={key} active={false} />
-                        )
+                            return (
+                                <TotalPreviewCard type={key} item={item} key={key} active={false} />
+                            )
                     })}
                 </div>
 
@@ -255,14 +259,27 @@ const MainScreen = () => {
                     <div onClick={() => dispatch(setBankCardStyleModalVisible())} className="cards-panel__header__change-card-button">
                         <img src={MoreButton} />
                     </div>
-                    <div className={isSetStyleModalVisible ? "cards-panel__header__change-card-button__modal" : "cards-panel__header__change-card-button__modal__not-visible"}>
-                            <div onClick={() => changeBankCardStyle("orange")} className="change-card-style__color"><div className="change-card-style__color__circle" style={{backgroundColor: "#FF998F"}}/>Orange</div>
-                            <div onClick={() => changeBankCardStyle("black")} className="change-card-style__color"><div className="change-card-style__color__circle" style={{backgroundColor: "#212121"}}/>Black</div>
-                            <div onClick={() => changeBankCardStyle("green")} className="change-card-style__color"><div className="change-card-style__color__circle" style={{backgroundColor: "#0F5959"}}/>Green</div>
-                            <div onClick={() => changeBankCardStyle("blue-green")} className="change-card-style__color"><div className="change-card-style__color__circle" style={{backgroundColor: "#6594DB"}}/>Blue-Green</div>
-                            <div onClick={() => changeBankCardStyle("gray")} className="change-card-style__color"><div className="change-card-style__color__circle" style={{backgroundColor: "#5B628B"}}/>Gray</div>
-                            <div onClick={() => changeBankCardStyle("blue")} className="change-card-style__color"><div className="change-card-style__color__circle" style={{backgroundColor: "#100DA7"}}/>Blue</div>
-                    </div>
+                    <Transition
+                        items={isSetStyleModalVisible}
+                        from={{ opacity: 0, transform: "translateY(-50px)" }}
+                        enter={{ opacity: 1, transform: "translateY(0px)" }}
+                        leave={{ opacity: 0, transform: "translateY(-50px)" }}
+                        // reverse={isSetStyleModalVisible}
+                        delay={50}
+                        duration={1000}
+                    // config={config.molasses}
+                    >
+                        {(styles, item) =>
+                            item && <animated.div style={styles} className="cards-panel__header__change-card-button__modal">
+                                <div onClick={() => changeBankCardStyle("orange")} className="change-card-style__color"><div className="change-card-style__color__circle" style={{ backgroundColor: "#FF998F" }} />Orange</div>
+                                <div onClick={() => changeBankCardStyle("black")} className="change-card-style__color"><div className="change-card-style__color__circle" style={{ backgroundColor: "#212121" }} />Black</div>
+                                <div onClick={() => changeBankCardStyle("green")} className="change-card-style__color"><div className="change-card-style__color__circle" style={{ backgroundColor: "#0F5959" }} />Green</div>
+                                <div onClick={() => changeBankCardStyle("blue-green")} className="change-card-style__color"><div className="change-card-style__color__circle" style={{ backgroundColor: "#6594DB" }} />Blue-Green</div>
+                                <div onClick={() => changeBankCardStyle("gray")} className="change-card-style__color"><div className="change-card-style__color__circle" style={{ backgroundColor: "#5B628B" }} />Gray</div>
+                                <div onClick={() => changeBankCardStyle("blue")} className="change-card-style__color"><div className="change-card-style__color__circle" style={{ backgroundColor: "#100DA7" }} />Blue</div>
+                            </animated.div>
+                        }
+                    </Transition>
                 </div>
 
                 <div className="cards-half-swipe-wrapper">
@@ -311,6 +328,22 @@ const MainScreen = () => {
 
                 {/* PEOPLE END */}
             </div>
+
+
+            <Transition
+                items={isInvoiceModalOpen}
+                from={{ opacity: 0 }}
+                enter={{ opacity: 1 }}
+                leave={{ opacity: 0 }}
+                duration={1000}
+            >
+                {(styles, item) =>
+                    item && <animated.div style={styles} className="more-info__wrapper">
+                        <div onClick={() => dispatch(setIsInvoiceModalOpen())} className="more-info__wrapper__background"></div>
+                    </animated.div>
+                }
+            </Transition>
+            <InvoiceWindow />
         </div>
     )
 }
